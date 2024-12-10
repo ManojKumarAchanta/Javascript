@@ -1,0 +1,51 @@
+<!-- // const jsonnames = `["Spongebob", "Patrick", "Sqidward", "Sandy"]`;
+// const jsonpeople = `[
+//   {
+//     name: "Spongebob",
+//     age: 30,
+//     isEmployed: true,
+//   },
+//   {
+//     name: "Patrik",
+//     age: 47,
+//     isEmployed: false,
+//   },
+//   {
+//     name: "Squidward",
+//     age: 50,
+//     isEmployed: true,
+//   },
+//   {
+//     name: "Sandy",
+//     age: 27,         
+//     isEmployed: false,
+//   },
+// ]`;
+// const jsonPerson = `{
+//   name: "Spongebob",
+//   age: 30,
+//   isEmployed: true,
+//   hobbies: ["jellyFishing", "karate", "cooking"],
+// }`;
+
+// const parsedData = JSON.parse(jsonnames);
+// console.log(jsonnames) -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        fetch("people.json")
+        .then(response=>response.json())
+        .then(values=>values.forEach(value=>console.log(value.isEmployed)));
+        .catch(e=>console.error(e));
+    </script>
+</body>
+</html>

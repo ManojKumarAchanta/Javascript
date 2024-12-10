@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fetch API using AJAX</title>
+  </head>
+  <style></style>
+  <body>
+    <button onclick="fetchData()">Get Data</button>
+    <script>
+      //fetch API using AJAX XML http request
+      // npx json-server -w ./Avengers.json -p 8080
+
+      function fetchData() {
+        const req = new XMLHttpRequest();
+        req.open("GET", "http://localhost:8080/Avengers");
+
+        req.onload = () => {
+          const data = JSON.parse(req.responseText); // Assuming data is an array of objects
+          const table = document.createElement("table");
+          document.body.appendChild(table);
+
+          const headerRow = document.createElement("tr");
+          ["Name", "Age", "Department"].forEach((headerText) => {
+            const th = document.createElement("th");
+            th.textContent = headerText;
+            headerRow.appendChild(th);
+          });
+          table.appendChild(headerRow);
+         
+          for (const element of data) {
+            const { name, age, Dept } = element;
+            const tr = document.createElement("tr");
+
+            [name, age, Dept].forEach((value) => {
+              const td = document.createElement("td");
+              td.textContent = value;
+              tr.appendChild(td);
+            });
+
+            table.appendChild(tr);
+          }
+        };
+        req.onerror = () => {
+          console.error("An error occurred during the request.");
+        };
+
+        req.send();
+      }
+    </script>
+  </body>
+</html>

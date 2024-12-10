@@ -1,0 +1,13 @@
+{
+    "Avengers":[
+        {"name":"John","age":35,"Dept":"TVA"},
+        {"name":"Marcus","age":36,"Dept":"TVA"},
+        {"name":"Joe","age":38,"Dept":"IT"},
+        {"name":"Jake","age":40,"Dept":"IT"},
+        {"name":"Jane","age":35,"Dept":"IT"},
+        {"name":"Smith","age":36,"Dept":"IT"},
+        {"name":"Peter","age":38,"Dept":"IT"},
+        {"name":"Steve Roger","age":39,"Dept":"IT"}
+        {"name":"Steve Roger","age":39,"Dept":"IT"}
+    ]
+}

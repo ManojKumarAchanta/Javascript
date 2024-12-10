@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fetch API using AJAX</title>
+  </head>
+  <body>
+    <button onclick="fetchData()">Get Data</button>
+    <div id="data"></div>
+    <script>
+      //fetch API using AJAX XML http request
+      // npx json-server -w ./Avengers.json -p 8080
+      function fetchData() {
+        const req = new XMLHttpRequest();
+        req.open("GET", "http://localhost:8080/Avengers");
+        req.onload = () => {
+          document.getElementById("data").textContent = req.responseText;
+        };
+        req.send();
+      }
+      function postData() {
+        const req = new XMLHttpRequest();
+        req.open("POST", "http://localhost:8080/Avengers");
+        req.onload = () => {
+          if (req.status === 200 || req.status === 201) alert("data submitted");
+        };
+        req.setRequestHeader("Content-Type", "application/json");
+        const data = {
+          name: "Tony Stark",
+          age: 45,
+          Dept: "Engineering",
+        };
+        req.send(JSON.stringify(data));
+      }
+    </script>
+  </body>
+</html>

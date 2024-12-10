@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Submission</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="flex flex-col items-center p-4">
+    <form
+      onsubmit="submitData(event)"
+      class="flex flex-col items-center bg-slate-200 w-[50%] p-4"
+    >
+      <label for="name">Name</label>
+      <input type="text" name="name" class="border border-gray-400 w-[80%]" required />
+      <label for="age">Age</label>
+      <input type="number" name="age" class="border border-gray-400 w-[80%]" required />
+      <label for="Dept">Dept</label>
+      <input type="text" name="Dept" class="border border-gray-400 w-[80%]" required />
+      <button type="submit" class="bg-green-400 px-2 py-2 rounded-lg mt-8">
+        Submit
+      </button>
+    </form>
+    <button
+      class="bg-blue-500 text-white px-4 py-2 rounded-lg mt-8"
+      onclick="fetchDataUsingPromises()"
+    >
+      GET ALL DATA
+    </button>
+    <div id="data" class="mt-8"></div>
+
+    <script>
+      async function fetchData() {
+        try {
+          const res = await fetch("http://localhost:8080/Avengers");
+          const data = await res.json();
+          console.log(data);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      }
+
+      function fetchDataUsingPromises() {
+        fetch("http://localhost:8080/Avengers")
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+
+            // Clear existing data
+            const dataDiv = document.getElementById("data");
+            dataDiv.innerHTML = "";
+
+            // Render each element
+            data.forEach((item) => {
+              const itemDiv = document.createElement("div");
+              itemDiv.textContent = `Name: ${item.name}, Age: ${item.age}, Dept: ${item.Dept}`;
+              dataDiv.appendChild(itemDiv);
+            });
+          })
+          .catch((error) => {
+            console.error("Error fetching data:", error);
+          });
+      }
+
+      function submitData(e) {
+        e.preventDefault();
+
+        // Get form data
+        const formData = new FormData(e.target);
+        const formObject = Object.fromEntries(formData);
+
+        // Log form data to the console
+        console.log("Form Submitted:", formObject);
+
+        fetch("http://localhost:8080/Avengers", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formObject),
+        })
+          .then((response) => {
+            if (response.ok) {
+              alert("Data submitted successfully!");
+              fetchDataUsingPromises(); // Refresh data
+            } else {
+              alert("Failed to submit data.");
+            }
+          })
+          .catch((error) => {
+            console.error("Error submitting data:", error);
+          });
+      }
+
+      fetchDataUsingPromises(); // Initial load
+    </script>
+  </body>
+</html>

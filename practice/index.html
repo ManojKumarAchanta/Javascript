@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error Handling</title>
+</head>
+<body>
+    <script>
+        try{
+            const dividend = window.prompt("Enter a dividend");
+        const divisor = window.prompt("Enter a divisor");
+
+        const result = dividend/divisor;
+
+        alet(result);
+        }catch(e){
+            console.log(e);
+        }finally{
+            alert("You reached the end");
+        }
+    </script>
+</body>
+</html>
